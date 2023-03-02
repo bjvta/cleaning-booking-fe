@@ -6,11 +6,15 @@ import { Route, Routes } from 'react-router-dom';
 import BookingList from './components/bookings/booking_list';
 import BookingNew from './components/bookings/booking_new';
 import BookingDetail from './components/bookings/booking_detail';
+import Calendar from "./components/calendar";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
+      <Calendar />
+
+
       <div className="container mt-3">
         <Routes>
           <Route path='/bookings' element={<BookingList />} />
