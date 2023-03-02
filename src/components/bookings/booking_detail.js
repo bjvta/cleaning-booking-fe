@@ -121,13 +121,13 @@ const BookingDetail = props => {
           </form>
 
           <button
-            className="badge badge-dange mr-2"
+            className="btn btn-danger"
             onClick={deleteBooking}
           >Delete</button>
 
           <button
             type="submit"
-            className="badge badge-success"
+            className="btn btn-success"
             onClick={updateBooking}
           >
             Update
