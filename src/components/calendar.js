@@ -15,25 +15,42 @@ import {
   TodayButton,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import {ViewState} from "@devexpress/dx-react-scheduler";
+import { useEffect, useState } from 'react';
+import { getCurrentDate } from '../utils/getCurrentDate';
+import Appointment from './appoinment';
 
-const currentDate = '2022-03-02'
-const schedulerData = [
-  { startDate: '2022-03-02T08:00', endDate: '2022-03-02T11:00', title: "Clean Lata's home"},
-  { startDate: '2022-03-02T08:00', endDate: '2022-03-02T11:00', title: "Clean Brandon's home"}
+
+
+let date = getCurrentDate('-')
+console.log(date)
+const currentDate = date
+const data = [
+  { id: 1, startDate: '2023-03-02T08:00', endDate: '2023-03-02T11:00', title: "Clean Lata's home", address: '1234 Main St', city: 'FL'},
+  { id: 2, startDate: '2023-03-02T08:00', endDate: '2023-03-02T11:00', title: "Clean Brandon's home", address: '1234 Main St', city: 'FL'},
 ]
 
 
 const Calendar = () => {
+  const [today, setToday] = useState(currentDate)
+  const [appoinments, setAppoinments] = useState(data)
+
+  useEffect(() => {
+    var today = new Date(),
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    setToday(date)
+    setAppoinments(data)
+  }, [])
+
   return (
-    <Paper>
-      <Scheduler
-        data={schedulerData}
-        heigh={660}
-      >
-        <ViewState currentDate={currentDate}
-                   defaultCurrentViewName="Week"
-        />
-        <DayView
+      <Paper>
+        <Scheduler
+          data={appoinments}
+        >
+          <ViewState
+            defaultCurrentDate={today}
+            defaultCurrentViewName="Week"
+          />
+          <DayView
           startDayHour={7}
           endDayHour={17}
         />
@@ -41,12 +58,14 @@ const Calendar = () => {
           startDayHour={7}
           endDayHour={17}
         />
-        <Toolbar />
-        <ViewSwitcher />
-        <MonthView />
-        <DateNavigator />
-        <TodayButton />
-        <Appointments />
+          <MonthView />
+          <Toolbar />
+          <ViewSwitcher />
+          <DateNavigator />
+          <TodayButton />
+          <Appointments 
+            appointmentComponent={Appointment}
+          />
         <AppointmentTooltip
           showCloseButton
           showOpenButton
@@ -54,9 +73,8 @@ const Calendar = () => {
         <AppointmentForm
           readOnly
         />
-      </Scheduler>
-    </Paper>
-  )
-}
-
+        </Scheduler>
+      </Paper>
+    );
+  }
 export default Calendar
