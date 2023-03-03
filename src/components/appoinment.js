@@ -9,10 +9,10 @@ const Appointment = ({
   children, style, ...restProps
 }) => {
 
-  const [backgroundColor, setBackgroundColor] = useState('#FFC107');
+  const [color, setColor] = useState('')
 
   useEffect(() => {
-    setBackgroundColor('#FFC107');
+    setColor('#FFC107')
   }, []);
 
   return (
@@ -20,7 +20,7 @@ const Appointment = ({
     {...restProps}
     style={{
       ...style,
-      backgroundColor: '#FFC107',
+      backgroundColor: color,
       borderRadius: '8px',
     }}
   >
