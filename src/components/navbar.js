@@ -8,6 +8,11 @@ export default function Navbar() {
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
+            <Link to={"/calendar"} className="nav-link">
+              Calendar
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link to={"/bookings"} className="nav-link">
               Bookings
             </Link>

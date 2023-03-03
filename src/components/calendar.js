@@ -17,6 +17,7 @@ import {ViewState} from "@devexpress/dx-react-scheduler";
 import { useEffect, useState } from 'react';
 import { getCurrentDate } from '../utils/getCurrentDate';
 import Appointment from './appoinment';
+import BookingDataService from '../services/BookingService';
 
 
 
@@ -37,8 +38,21 @@ const Calendar = () => {
     var today = new Date(),
     date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     setToday(date)
-    setAppoinments(data)
+    retrieveAppoinments()
   }, [])
+
+  const retrieveAppoinments = () => {
+    BookingDataService.getAllForCalendar()
+      .then(response => {
+        setAppoinments(response.data)
+        console.log(response.data)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }
+
+  
 
   return (
       <Paper>

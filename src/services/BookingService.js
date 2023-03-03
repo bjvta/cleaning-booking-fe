@@ -6,6 +6,10 @@ const getAll = () => {
   return http.get(BOOKING_URL)
 }
 
+const getAllForCalendar = () => {
+  return http.get(`${BOOKING_URL}_for_calendar.json`)
+}
+
 const get = id => {
   return http.get(`${BOOKING_URL}/${id}`)
 }
@@ -27,7 +31,8 @@ const BookingService = {
   get,
   create,
   update,
-  remove
+  remove,
+  getAllForCalendar
 }
 
 export default BookingService

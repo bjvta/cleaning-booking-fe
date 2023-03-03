@@ -12,11 +12,9 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Calendar />
-
-
       <div className="container mt-3">
         <Routes>
+          <Route path='/calendar' element={<Calendar />} />
           <Route path='/bookings' element={<BookingList />} />
           <Route path='/bookings/new' element={<BookingNew />} />
           <Route path='/bookings/:id' element={<BookingDetail />} />
