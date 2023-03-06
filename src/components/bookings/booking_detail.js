@@ -11,6 +11,13 @@ import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
 import {TimeField} from "@mui/x-date-pickers/TimeField";
 // import Booking from "../../services/BookingDataService"
 import moment from "moment";
+
+const styles = {
+  button: {
+    margin: '5px'
+  }
+}
+
 const BookingDetail = props => {
   const { id } = useParams()
   let navigate = useNavigate()
@@ -49,6 +56,10 @@ const BookingDetail = props => {
   const handleInputChange = event => {
     const { name, value } = event.target
     setCurrentBooking({...currentBooking, [name]: value})
+  }
+
+  const goBookings = () => {
+    navigate("/bookings")
   }
 
   const updateBooking = () => {
@@ -144,18 +155,30 @@ const BookingDetail = props => {
             </div>
           </form>
 
+          <br />  
+          
           <button
-            className="btn btn-danger"
-            onClick={deleteBooking}
-          >Delete</button>
+            className="btn btn-primary"
+            onClick={goBookings}
+            style={styles.button}
+          >Go Bookings</button>
+
 
           <button
             type="submit"
-            className="btn btn-success"
+            className="btn btn-warning"
             onClick={updateBooking}
+            style={styles.button}
           >
             Update
           </button>
+          
+          <button
+            className="btn btn-danger"
+            onClick={deleteBooking}
+            style={styles.button}
+          >Delete</button>
+
           <p>{message}</p>
         </div>
       ): (

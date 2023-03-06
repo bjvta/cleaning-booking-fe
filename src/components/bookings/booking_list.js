@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import BookingDataService from "../../services/BookingService";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const BookingList = () => {
   const [bookings, setBookings] = useState([])
@@ -52,25 +59,11 @@ const BookingList = () => {
 
   return(
     <div className="list row">
-      <div className="col-md-8">
+      {/* <div className="col-md-8">
         <div className="input-group mb-3">
-          {/* Here goes the searching */}
+          Here goes the searching
         </div>
-      </div>
-      <div className="col-md-6">
-        <h4>Booking List</h4>
-        {bookings &&
-          bookings.map( (booking, index) => (
-            <li
-              className="list-group-item"
-              key={index}
-              onClick={() => setActiveBooking(booking, index)}
-              >
-              {booking.name} {booking.date} {booking.time}
-            </li>
-          ))
-          }
-      </div>
+      </div> */}
       <div className="col-md-6">
         {currentBooking ? (
           <div>
@@ -100,6 +93,43 @@ const BookingList = () => {
             <p>Please click on a Booking...</p>
           </div>
         )}
+      </div>
+
+      <div className="col-md-12">
+        <h4>Booking List</h4>
+        <div>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Customer Name</TableCell>
+                  <TableCell align="right">Date</TableCell>
+                  <TableCell align="right">Time</TableCell>
+                  {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                  <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {bookings && bookings.map((booking) => (
+                  <TableRow
+                    key={booking.name}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    onClick={() => setActiveBooking(booking, booking.id)}
+                  >
+                    <TableCell component="th" scope="row">
+                      {booking.name}
+                    </TableCell>
+                    <TableCell align="right">{booking.date}</TableCell>
+                    <TableCell align="right">{booking.time}</TableCell>
+                    {/* <TableCell align="right">{row.carbs}</TableCell>
+                    <TableCell align="right">{row.protein}</TableCell> */}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+        </div>
       </div>
     </div>
   )
