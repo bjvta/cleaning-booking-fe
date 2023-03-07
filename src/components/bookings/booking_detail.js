@@ -27,6 +27,7 @@ const BookingDetail = props => {
     name: "",
     date: "",
     time: "",
+    hours: 2,
     address: ""
   }
 
@@ -138,6 +139,19 @@ const BookingDetail = props => {
                   />
                 </DemoContainer>
               </LocalizationProvider>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="hours">Hours</label>
+              <input 
+                type="text"
+                className="form-control"
+                id="hours"
+                required
+                value={currentBooking.hours}
+                onChange={handleInputChange}
+                name="hours"
+              />
             </div>
 
 

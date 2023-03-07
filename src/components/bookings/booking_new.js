@@ -17,6 +17,7 @@ const BookingNew = () => {
     name: "",
     date: "",
     time: "",
+    hours: 2,
     address: ""
   }
 
@@ -45,6 +46,7 @@ const BookingNew = () => {
           name: response.data.name,
           date: response.data.date,
           time: response.data.time,
+          hours: response.data.hours,
           address: response.data.address,
         });
         setDate(response.data.date)
@@ -118,6 +120,19 @@ const BookingNew = () => {
                 />
               </DemoContainer>
             </LocalizationProvider>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="hours">Hours</label>
+            <input 
+              type="text"
+              className="form-control"
+              id="hours"
+              required
+              value={booking.hours}
+              onChange={handleInputChange}
+              name="hours"
+            />
           </div>
 
           <div className="form-group">

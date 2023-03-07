@@ -78,6 +78,9 @@ const BookingList = () => {
               <label><strong>Time:</strong></label>{" "}{currentBooking.time}
             </div>
             <div>
+              <label><strong>Hours:</strong></label>{" "}{currentBooking.hours}
+            </div>
+            <div>
               <label><strong>Address:</strong></label>{" "}{currentBooking.address}
             </div>
             <Link
@@ -102,9 +105,11 @@ const BookingList = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
+                  <TableCell>ID</TableCell>
                   <TableCell>Customer Name</TableCell>
                   <TableCell align="right">Date</TableCell>
                   <TableCell align="right">Time</TableCell>
+                  <TableCell align="right">Hours</TableCell>
                   {/* <TableCell align="right">Carbs&nbsp;(g)</TableCell>
                   <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
                 </TableRow>
@@ -116,11 +121,11 @@ const BookingList = () => {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     onClick={() => setActiveBooking(booking, booking.id)}
                   >
-                    <TableCell component="th" scope="row">
-                      {booking.name}
-                    </TableCell>
+                    <TableCell component="th" scope="row">{booking.id}</TableCell>
+                    <TableCell component="th" scope="row">{booking.name}</TableCell>
                     <TableCell align="right">{booking.date}</TableCell>
                     <TableCell align="right">{booking.time}</TableCell>
+                    <TableCell align="right">{booking.hours}</TableCell>
                     {/* <TableCell align="right">{row.carbs}</TableCell>
                     <TableCell align="right">{row.protein}</TableCell> */}
                   </TableRow>
