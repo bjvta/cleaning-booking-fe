@@ -117,7 +117,7 @@ const BookingList = () => {
               <TableBody>
                 {bookings && bookings.map((booking) => (
                   <TableRow
-                    key={booking.name}
+                    key={booking.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     onClick={() => setActiveBooking(booking, booking.id)}
                   >

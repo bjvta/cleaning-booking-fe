@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import BookingDataService from "../../services/BookingService"
-import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {DatePicker} from "@mui/x-date-pickers/DatePicker";
-import TextField from "@mui/material/TextField";
 import * as React from "react";
 import dayjs from "dayjs";
-import {DemoContainer} from "@mui/x-date-pickers/internals/demo";
-import {TimeField} from "@mui/x-date-pickers/TimeField";
-// import Booking from "../../services/BookingDataService"
-import moment from "moment";
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from 'react-time-picker'
 
 const styles = {
   button: {
@@ -40,9 +36,8 @@ const BookingDetail = props => {
     BookingDataService.get(id)
       .then(response => {
         setCurrentBooking(response.data)
-        setDate(dayjs(response.data.date))
-        setTime(dayjs(`${response.data.date}T${response.data.time}`))
-        console.log(response.data)
+        setDate(dayjs(response.data.date).$d)
+        setTime(response.data.time.substr(0,5))
       })
       .catch(e => {
         console.log(e)
@@ -65,7 +60,7 @@ const BookingDetail = props => {
 
   const updateBooking = () => {
     currentBooking.date = date
-    currentBooking.time = moment(time.$d).format('HH:mm')
+    currentBooking.time = time
     console.log(currentBooking)
     BookingDataService.update(currentBooking.id, currentBooking)
       .then(response => {
@@ -110,35 +105,23 @@ const BookingDetail = props => {
             <div className="form-group">
               <label htmlFor="date">Date</label>
               <br />
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="Date"
-                  className="form-control"
-                  name="date"
-                  value={date}
-                  onChange={(newValue) => {
-                    setDate(newValue);
-                  }}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
+              <DatePicker 
+              selected={date} 
+              className="form-control"
+              onChange={(date) => setDate(date)} />
             </div>
 
 
             <div className="form-group">
               <label htmlFor="time">Time</label>
               <br />
-              <LocalizationProvider dateAdapter={AdapterDayjs} >
-                <DemoContainer components={['TimeField']}>
-                  <TimeField
-                    className="form-control"
-                    label="Time"
-                    value={time}
-                    onChange={(newValue) => setTime(newValue)}
-                    format="HH:mm"
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
+              <TimePicker
+              disableClock={true}
+              className="form-control"
+              format="HH:mm"
+              onChange={setTime} 
+              value={time} 
+              />
             </div>
 
             <div className="form-group">

@@ -3,11 +3,11 @@ import * as React from 'react';
 import BookingDataService from "../../services/BookingService"
 import { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { TimeField } from '@mui/x-date-pickers/TimeField';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from 'react-time-picker'
+
+
 import moment from "moment";
 
 
@@ -35,7 +35,7 @@ const BookingNew = () => {
     let data = {
       name: booking.name,
       date: date,
-      time: moment(time.$d).format('HH:mm'),
+      time: time,
       address: booking.address
     }
 
@@ -63,6 +63,8 @@ const BookingNew = () => {
     setBooking(initialBookingState)
     setSubmitted(false)
   }
+
+  console.log(time);
 
   return (
     <div className="submit-form">
@@ -92,7 +94,11 @@ const BookingNew = () => {
           <div className="form-group">
             <label htmlFor="date">Date</label>
             <br />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker 
+              selected={date} 
+              className="form-control"
+              onChange={(date) => setDate(date)} />
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Date"
                 className="form-control"
@@ -103,13 +109,20 @@ const BookingNew = () => {
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
-            </LocalizationProvider>
+            </LocalizationProvider> */}
           </div>
 
           <div className="form-group">
             <label htmlFor="time">Time</label>
             <br />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <TimePicker
+              disableClock={true}
+              className="form-control"
+              format="HH:mm"
+              onChange={setTime} 
+              value={time} 
+              />
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={['TimeField']}>
                 <TimeField
                   className="form-control"
@@ -119,7 +132,7 @@ const BookingNew = () => {
                   format="HH:mm"
                 />
               </DemoContainer>
-            </LocalizationProvider>
+            </LocalizationProvider> */}
           </div>
 
           <div className="form-group">
